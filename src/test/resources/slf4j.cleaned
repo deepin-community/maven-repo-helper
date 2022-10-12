@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.slf4j</groupId>
+	<artifactId>slf4j-parent</artifactId>
+	<version>debian</version>
+	<packaging>pom</packaging>
+	<properties>
+		<debian.hasPackageVersion/>
+		<debian.junit.junit.originalVersion>3.8.1</debian.junit.junit.originalVersion>
+		<debian.originalVersion>1.5.6</debian.originalVersion>
+		<debian.package>libslf4j-java</debian.package>
+	</properties>
+	
+	<name>SLF4J</name>
+	<modules>
+		<module>slf4j-api</module>
+		<module>slf4j-simple</module>
+		<module>slf4j-nop</module>
+		<module>slf4j-jdk14</module>
+		<module>slf4j-log4j12</module>
+		<module>slf4j-jcl</module>
+		<module>slf4j-ext</module>
+		<module>jcl-over-slf4j</module>
+		<module>jcl104-over-slf4j</module>
+		<module>log4j-over-slf4j</module>
+		<module>jul-to-slf4j</module>
+		<module>integration</module>
+		<module>slf4j-site</module>
+		<module>slf4j-migrator</module>
+	</modules>
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>debian</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+				<version>debian</version>
+			</dependency>
+			<dependency>
+				<groupId>log4j</groupId>
+				<artifactId>log4j</artifactId>
+				<version>debian</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+</project>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.hibernate</groupId>
+	<artifactId>hibernate-validator-parent</artifactId>
+	<version>debian</version>
+	<packaging>pom</packaging>
+	<properties>
+		<debian.hasPackageVersion/>
+		<debian.originalVersion>4.0.2.GA</debian.originalVersion>
+		<debian.package>libhibernate-validator-java</debian.package>
+	</properties>
+	
+	<name>Hibernate Validator Parent</name>
+	<description>Hibernate's Bean Validation (JSR-303) reference implementation.</description>
+	<modules>
+		<module>hibernate-validator</module>
+		<module>hibernate-validator-archetype</module>
+		<module>hibernate-validator-legacy</module>
+		<module>hibernate-validator-tck-runner</module>
+	</modules>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>javax.validation</groupId>
+				<artifactId>validation-api</artifactId>
+				<version>debian</version>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+				<version>debian</version>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-log4j12</artifactId>
+				<version>debian</version>
+			</dependency>
+			<dependency>
+				<groupId>org.testng</groupId>
+				<artifactId>testng</artifactId>
+				<version>debian</version>
+				<classifier>jdk15</classifier>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+</project>

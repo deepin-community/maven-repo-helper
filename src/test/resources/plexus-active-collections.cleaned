@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.codehaus.plexus</groupId>
+	<artifactId>plexus-active-collections</artifactId>
+	<version>debian</version>
+	<packaging>jar</packaging>
+	<properties>
+		<debian.hasPackageVersion/>
+		<debian.junit.junit.originalVersion>3.8.1</debian.junit.junit.originalVersion>
+		<debian.org.codehaus.plexus.plexus-component-api.originalVersion>1.0-alpha-22</debian.org.codehaus.plexus.plexus-component-api.originalVersion>
+		<debian.org.codehaus.plexus.plexus-container-default.originalVersion>1.0-alpha-22</debian.org.codehaus.plexus.plexus-container-default.originalVersion>
+		<debian.originalVersion>1.0-beta-2</debian.originalVersion>
+		<debian.package>libplexus-active-collections-java</debian.package>
+	</properties>
+	
+	<name>Plexus Container-Backed Active Collections</name>
+	<dependencies>
+		<dependency>
+			<groupId>org.codehaus.plexus</groupId>
+			<artifactId>plexus-component-api</artifactId>
+			<version>debian</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.plexus</groupId>
+			<artifactId>plexus-container-default</artifactId>
+			<version>1.0-alpha</version>
+		</dependency>
+	</dependencies>
+</project>

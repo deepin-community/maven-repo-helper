@@ -1,0 +1,11 @@
+#List of dependencies for libcommons-compress-java, generated for use by debian/control
+maven:DocOptionalDepends=
+maven:Depends=libcommons-parent-java (>= 43)
+maven:OptionalDepends=libxz-java (>= 1.8)
+maven:CompileDepends=libmaven-antrun-plugin-java (>= 1.8), libmaven-bundle-plugin-java (>= 3.5.1), libmaven-compiler-plugin-java (>= 3.8.1), libmaven-jar-plugin-java (>= 3.1.2)
+maven:DocDepends=
+maven:TestDepends=
+java:Depends=libxz-java
+java:Recommends=
+misc:Depends=
+misc:Pre-Depends=

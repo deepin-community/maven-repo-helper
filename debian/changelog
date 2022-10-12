@@ -1,0 +1,502 @@
+maven-repo-helper (1.10) unstable; urgency=medium
+
+  * Fixed the resolution of the dependencies with a classifier (Closes: #982438)
+  * Added the classifier to the string representation of a Dependency
+  * Build with the DH sequencer instead of CDBS
+  * Standards-Version updated to 4.5.1
+  * Switch to debhelper level 13
+  * Fixed the lintian warnings on debian/copyright
+  * Updated the location of the source repository in pom.xml and d/copyright
+
+ -- Emmanuel Bourg <ebourg@apache.org>  Wed, 10 Feb 2021 14:08:24 +0100
+
+maven-repo-helper (1.9.4) unstable; urgency=medium
+
+  [ Emmanuel Bourg ]
+  * Team upload.
+  * Require Java 7 or higher
+  * Fixed the parsing of substvars files when the variable's names contain ":"
+  * Added a unit test for Substvars.write()
+
+  [ tony mancill ]
+  * Update build.javaVersion to 1.7 (Closes: #941737)
+  * Update dependency on python-docutils for python3 (Closes: #943174)
+
+ -- tony mancill <tmancill@debian.org>  Mon, 28 Oct 2019 20:07:24 -0700
+
+maven-repo-helper (1.9.3) unstable; urgency=medium
+
+  * Team upload.
+
+  [ tony mancill ]
+  * Apply patch for mh_patchpoms to honor the --verbose option.
+    Thank you to Christopher Hoskin for the patch. (Closes: #835042)
+
+  [ Giovanni Mascellani ]
+  * Document the fact that more than one relocation can be specified.
+
+  [ Emmanuel Bourg ]
+  * Ignore the --relocate option with mh_installsite and mh_linkjar
+    (Closes: #891695)
+  * Overwrite the relocation pom instead of appending to it
+  * Removed Damien Raude-Morvan from the uploaders (Closes: #889347)
+  * Removed the dependency on libstax-java
+  * Standards-Version updated to 4.1.4
+  * Switch to debhelper level 10
+  * Use salsa.debian.org Vcs-* URLs
+
+ -- Emmanuel Bourg <ebourg@apache.org>  Wed, 13 Jun 2018 13:40:38 +0200
+
+maven-repo-helper (1.9.2) unstable; urgency=medium
+
+  * Team upload.
+  * Fixed the error caused by the -i option added to mh_install by DH
+    when building the architecture independent packages only (Closes: #805228)
+
+ -- Emmanuel Bourg <ebourg@apache.org>  Thu, 21 Jul 2016 00:04:17 +0200
+
+maven-repo-helper (1.9.1) unstable; urgency=medium
+
+  * Added the debian.package property in the relocated poms
+
+ -- Emmanuel Bourg <ebourg@apache.org>  Thu, 30 Jun 2016 15:56:50 +0200
+
+maven-repo-helper (1.9) unstable; urgency=medium
+
+  * Added the --relocate option to mh_installpom
+  * Reduced the size of the poms installed in /usr/share/maven-repo by removing
+    the non-functional elements (licenses, scm, developers, contributors,
+    issueManagement, mailingLists, inceptionYear, url, organization).
+  * Fixed a typo in the manpage for mh_patchpoms
+  * Standards-Version updated to 3.9.8 (no changes)
+  * Use secure Vcs-* URLs
+
+ -- Emmanuel Bourg <ebourg@apache.org>  Thu, 30 Jun 2016 10:36:41 +0200
+
+maven-repo-helper (1.8.12) unstable; urgency=medium
+
+  * Fixed a parsing error with poms containing a byte order mark
+  * Always use the same system independent encoding when transforming
+    the pom files to improve the reproducibility of the builds.
+
+ -- Emmanuel Bourg <ebourg@apache.org>  Tue, 21 Jul 2015 09:44:53 +0200
+
+maven-repo-helper (1.8.11) unstable; urgency=medium
+
+  * Upload to unstable
+  * Insert mh_install after dh_install and not before dh_compress to ensure
+    the jars are always installed before running dh_strip_nondeterminism,
+    jh_classpath and jh_manifest. This fixes a build failure with libjdom2-java
+    and javahelper >= 0.49.
+  * Standards-Version updated to 3.9.6 (no changes)
+
+ -- Emmanuel Bourg <ebourg@apache.org>  Wed, 10 Jun 2015 13:07:58 +0200
+
+maven-repo-helper (1.8.10) experimental; urgency=medium
+
+  * Fixed a bug preventing rules like 's/org.foo/org.bar/ * * s/.*/debian/ * *'
+    from working properly.
+
+ -- Emmanuel Bourg <ebourg@apache.org>  Wed, 28 Jan 2015 22:52:17 +0100
+
+maven-repo-helper (1.8.9) unstable; urgency=medium
+
+  * Allow rules like s/foo// to remove an element of the Maven coordinates
+  * Fixed the transformation of the classifier in the Maven coordinates
+
+ -- Emmanuel Bourg <ebourg@apache.org>  Thu, 04 Sep 2014 10:04:45 +0200
+
+maven-repo-helper (1.8.8) unstable; urgency=medium
+
+  * Parse and transform the module elements declared in profiles
+
+ -- Emmanuel Bourg <ebourg@apache.org>  Mon, 30 Jun 2014 12:20:52 +0200
+
+maven-repo-helper (1.8.7) unstable; urgency=medium
+
+  * Fixed the parsing of the systemPath element (Closes: #740000)
+
+ -- Emmanuel Bourg <ebourg@apache.org>  Wed, 26 Feb 2014 00:44:34 +0100
+
+maven-repo-helper (1.8.6) unstable; urgency=medium
+
+  * Internal refactoring
+
+ -- Emmanuel Bourg <ebourg@apache.org>  Thu, 06 Feb 2014 14:27:52 +0100
+
+maven-repo-helper (1.8.5) unstable; urgency=low
+
+  * Team upload.
+
+  [ Emmanuel Bourg ]
+  * Build depend on debhelper 9
+  * Removed the Maven presentation from the package description
+    (Closes: #704092)
+  * Added several methods to org.debian.maven.repo.Dependency to check
+    the type of the artifact
+  * Removed the no longer used Preconditions class
+  * The API changes break the compatibility with maven-debian-helper (<= 1.6.5)
+  * debian/rules: Added ant-junit4.jar to the classpath to fix the test failures
+  * Stop the build on test failures
+
+  [ tony mancill ]
+  * Bump Standards-Version to 3.9.5.
+
+ -- tony mancill <tmancill@debian.org>  Mon, 02 Dec 2013 22:10:14 -0800
+
+maven-repo-helper (1.8.4) unstable; urgency=low
+
+  * Fixed a regression in the pom parser (Closes: #712658)
+  * The name of the pom is now displayed when a parsing error occurs
+
+ -- Emmanuel Bourg <ebourg@apache.org>  Wed, 07 Aug 2013 17:53:13 +0200
+
+maven-repo-helper (1.8.3) unstable; urgency=low
+
+  * Fixed the usage of the debhelper functions in jh_maven_repo_helper.pm.
+    Thanks to Wolodja Wentland for the fix (Closes: #709446)
+
+ -- Emmanuel Bourg <ebourg@apache.org>  Thu, 23 May 2013 15:28:46 +0200
+
+maven-repo-helper (1.8.2) unstable; urgency=low
+
+  * Fixed the POM reader to handle properly character chunks
+    (Closes: #693234, #688085)
+  * Enabled more tests by adding the missing @Test annotations
+  * Updated Standards-Version to 3.9.4 (no changes)
+  * Added junit4 to the classpath
+  * debian/copyright: Updated the Format URI to 1.0
+  * Upload to unstable
+
+ -- Emmanuel Bourg <ebourg@apache.org>  Tue, 21 May 2013 00:30:12 +0200
+
+maven-repo-helper (1.8.1) experimental; urgency=low
+
+  [ Emmanuel Bourg ]
+  * Replaces tabs with spaces in Java files
+  * Replaced StringBuffers with StringBuilders
+  * Minor code changes (for each loops, indexOf->contains)
+
+  [ Thomas Koch ]
+  * Add Preconditions util class
+  * fix NPE. Thx to Emmanuel Bourg
+
+ -- Thomas Koch <thomas@koch.ro>  Thu, 04 Apr 2013 20:23:31 +0200
+
+maven-repo-helper (1.8) experimental; urgency=low
+
+  [Ludovic Claude]
+  * Move repository to Git, thanks to Thomas Koch.
+    (Closes: #644259)
+  * Convert Markdown documentation into reStructuredText
+    format, as markdown package is not much maintained and not
+    officially supported in Ubuntu.
+  * d/control:
+    - Bump Standards-Version to 3.9.3 (no changes needed).
+    - update Vcs-Browser and Vcs-Git fields following move to Git
+    - Build-Depends: replace dependency on markdown by python-docutils
+    - use junit4 instead of junit
+
+  [Thomas Kock]
+  * massive code refactorings and cleanups
+
+ -- Thomas Koch <thomas@koch.ro>  Thu, 28 March 2013 11:45:21 +0200
+
+maven-repo-helper (1.7.1) unstable; urgency=low
+
+  * Build with Java 5, use generics. (Closes: #644260)
+  * Fix resolution of versions from dependency management
+  * Fix ignore modules in a POM transformation
+
+ -- Ludovic Claude <ludovic.claude@laposte.net>  Mon, 02 Jan 2012 20:27:26 +0100
+
+maven-repo-helper (1.7) unstable; urgency=low
+
+  * add --site-xml=<location> option to mh_install and in the
+    <package>.poms file to explicitly define the location for site.xml.
+    Warning: this forces existing packages to add this option if they
+    need to install site.xml
+  * update the version in the POM and in the documentation
+    (Closes: #644258)
+  * run the unit tests when building the package, fix broken tests after the
+    introduction of relativePath on the parent element of cleaned POM files.
+  * d/control: add ant-optional, junit, libxmlunit-java, libcommons-io-java to
+    Build-Depend-Indep
+  * d/copyright: update fields to match latest DEP5 spec.
+
+ -- Ludovic Claude <ludovic.claude@laposte.net>  Tue, 01 Nov 2011 16:32:39 +0200
+
+maven-repo-helper (1.6) unstable; urgency=low
+
+  [ Ludovic Claude ]
+  * Add tutorial, reference and repository specification in documentation
+  * Update options on mh_installpom and mh_installpoms, to use the new arguments
+    added to mh_cleanpom
+  * Add Build-Depend on markdown to build the doc
+  * Add support for packages built with dh 7 and javahelper: use
+    the following line in your rules file:
+     dh $@ --with javahelper --with jh_maven_repo_helper
+    This will build the package with javahelper, and the resulting
+    jar will be installed in the Maven repository (you need of course the
+    <package>.poms file and the POM files in your package).
+  * Add mh_linkjars to link the jars listed in the .poms file, this is used by
+    the jh_maven_repo_helper plugin for dh 7.
+  * Deprecate mh_installjar -i option and replace it with -j to avoid conflicts
+    with -i/--ignore-rules option used elsewhere.
+  * Review all options passed to the mh_* scripts, in particular --set-version
+    for mh_installjar (Closes: #640730)
+
+  [ Damien Raude-Morvan ]
+  * mh_checkrepo: Fix error when launching without any param.
+
+ -- Ludovic Claude <ludovic.claude@laposte.net>  Mon, 26 Sep 2011 22:55:09 +0100
+
+maven-repo-helper (1.5.2) unstable; urgency=low
+
+  [ Ludovic Claude ]
+  * Match jar with bundle as they are equivalent
+
+  [ Damien Raude-Morvan ]
+  * Keep relativePath attribute on parent pom.
+  * d/control: Fix typo in package description (Closes: #617438).
+  * src/main/java/org/debian/maven/repo/RepositoryReportWriter.java: Add
+    a hack to change output of Maven repository checker.
+  * Bump Standards-Version to 3.9.2 (no changes needed).
+
+ -- Damien Raude-Morvan <drazzib@debian.org>  Tue, 16 Aug 2011 19:28:03 +0200
+
+maven-repo-helper (1.5.1) unstable; urgency=low
+
+  * Upload to unstable.
+
+ -- Torsten Werner <twerner@debian.org>  Wed, 09 Feb 2011 21:39:12 +0100
+
+maven-repo-helper (1.5) experimental; urgency=low
+
+  * Create mh_installsite to install site.xml into the Maven repository,
+    and integrate it with mh_install
+  * Avoid duplication between rules in maven.rules and maven.publishedRules,
+    as well as between maven.ignoreRules and maven.cleanIgnoreRules
+  * Fix ignore modules, make it work in more cases.
+  * mh_clean: clean also files listed in .mh_clean, similar to what jh_clean
+    does.
+  * add support for dh 7 and ant builds: use the following line in your
+    rules file:
+     dh $@ --with ant --with maven_repo_helper
+
+ -- Ludovic Claude <ludovic.claude@laposte.net>  Thu, 11 Nov 2010 18:49:49 +0100
+
+maven-repo-helper (1.4) experimental; urgency=low
+
+  * Better support for inserting properties in the transformed or cleaned
+    POM files. Avoid duplicate properties and allow definition of new
+    properties.
+  * add support for --has-package-version and --keep-elements in the
+    <package>.poms file, for mh_install add --artifact, --java-lib,
+    --usj-name, --usj-version, --no-usj-versionless, --dest-jar
+  * update README.Debian and document the new options.
+  * change license from BSD to Apache 2.0, there's no need to have so many
+    different licenses in this package, MIT and Apache2.0 are already used.
+  * Keep comments in the POM files as much as possible (Closes: #574045)
+  * mh_cleanpom: keep <build>, <report> and <reporting> elements if the type
+    of the POM file is 'pom'.
+  * mh_cleanpom, mh_patchpom: plugin configuration elements containing
+    dependencies such as:
+    <resourceBundle>org.apache:apache-jar-resource-bundle:1.x</resourceBundle>
+    are detected and rules are applied to them
+  * mh_patchpom: --keep-pom-version option keeps the version of the parent POM
+    except when the parent is already registered in the Maven repository
+  * new mh_install command to install in one go the pom files and all jars in
+    the Maven repository
+
+ -- Ludovic Claude <ludovic.claude@laposte.net>  Fri, 17 Sep 2010 00:07:36 +0200
+
+maven-repo-helper (1.3) experimental; urgency=low
+
+  [ Peter Collingbourne ]
+  * Document the correct order of attributes in rules files
+  * Escape all $ characters in usage messages
+  * Fix a long option quoting bug
+  * Add support for extra rule options on the command line
+  * Add a --no-publish-used-rule option
+
+  [ Ludovic Claude ]
+  * debian/control: Update Standards-Version to 3.9.1, no changes
+  * mh_transformpoms: Remove warning about missing parent dependency
+    when no-parent option is already used
+  * Dependency class: make it Comparable, to allow easy sorting of dependencies.
+  * mh_cleanpoms: rules defined in --clean-ignore-rules (or
+    debian/maven.cleanIgnoreRules) are used in addition to the rules defined in
+    --ignore-rules (or debian/maven.ignoreRules), so there is no need anymore
+    to duplicate the list of rules to ignore when --clean-ignore-rules is used.
+  * Removed small bugs in mh_make (Closes: #591513)
+
+ -- Ludovic Claude <ludovic.claude@laposte.net>  Thu, 16 Sep 2010 23:18:57 +0200
+
+maven-repo-helper (1.2) unstable; urgency=low
+
+  * Fix 'illegal NCName' error when gcj is used to run the mh_* scripts
+  * Expand more Maven properties in POM files.
+  * Support <property/> syntax in <properties> tag
+  * Handle better configuration elements in plugins (ignore them)
+  * Add support for plugin elements in <profile> tags
+  * Add support for dependency classifiers
+  * Add support for <reporting> tags and their plugins
+  * Fix some XML issues when gcj is used
+  * Add new unit tests and fix several small issues
+  * Insert the original versions of the dependencies in the cleaned poms,
+    this will help a future mh_upgrade tool
+
+ -- Ludovic Claude <ludovic.claude@laposte.net>  Mon, 28 Jun 2010 23:13:51 +0200
+
+maven-repo-helper (1.1) unstable; urgency=low
+
+  * Add mh_patchpom, useful in some situations to patch
+    individual POM files
+  * Add mh_linkrepojar, to create a link from a jar present in the
+    Maven repository
+  * Correctly identify <extension> tag used by Maven (Closes: #584512)
+  * Add documentation for the package and in particular for the syntax
+    of the debian/<package>.poms file (Closes: #586151)
+  * All mh_* scripts now use debian/.mh/ as their temporary work folder
+    instead of debian/tmp, this better satisfies the Debian policies.
+  * Add mh_cleantmp to remove the temporary files produced when using
+    any other mh_* script
+  * Fix typo in package description (Closes: #586573)
+
+ -- Ludovic Claude <ludovic.claude@laposte.net>  Fri, 21 May 2010 00:11:48 +0200
+
+maven-repo-helper (1.0.6) unstable; urgency=low
+
+  * Rule.java: harden our handling of version string (from pom.xml)
+    to cope with specials chars.
+  * POMTransformer: If we can't find a dependency, just skip it.
+  * Switch to 3.0 (native) format
+
+ -- Damien Raude-Morvan <drazzib@debian.org>  Mon, 05 Apr 2010 21:44:47 +0200
+
+maven-repo-helper (1.0.5) unstable; urgency=low
+
+  * mh_installjar: Add new -e/--set-version switchs and handle
+    them as we already do in mh_installpom.
+
+ -- Damien Raude-Morvan <drazzib@debian.org>  Fri, 19 Mar 2010 22:34:26 +0100
+
+maven-repo-helper (1.0.4) unstable; urgency=low
+
+  * Fix "ignores the --no-parent option in the .poms file" (Closes: #573049)
+    - mh_installpom: Pass "--no-parent" option to mh_cleanpom.
+
+ -- Damien Raude-Morvan <drazzib@debian.org>  Tue, 09 Mar 2010 22:51:04 +0100
+
+maven-repo-helper (1.0.3) unstable; urgency=low
+
+  * mh_installpoms: Fix call to mh_installpom.
+    Use MH_ARGS instead of (non-existing) MH_OPTS variable.
+
+ -- Damien Raude-Morvan <drazzib@debian.org>  Tue, 02 Mar 2010 21:09:04 +0100
+
+maven-repo-helper (1.0.2) unstable; urgency=low
+
+  * A leak of environment variables activated the no-rules option
+    on mh_cleanpom, preventing mh_installjar to work properly
+    in some cases (Closes: #570863)
+
+ -- Ludovic Claude <ludovic.claude@laposte.net>  Mon, 01 Mar 2010 00:46:16 +0100
+
+maven-repo-helper (1.0.1) unstable; urgency=low
+
+  * Bump up Standards-Version to 3.8.4
+  * Fix NPE on mh_transformpoms
+  * Looks like I missed many files while merging changes
+    to Debian, it's now fixed.
+
+ -- Ludovic Claude <ludovic.claude@laposte.net>  Mon, 01 Feb 2010 23:02:27 +0100
+
+maven-repo-helper (1.0) unstable; urgency=low
+
+  * Add more unit tests
+  * maven.ignoreRules now supports eliminating some plugins from the build
+  * maven.rules can be used to repair missing version numbers for
+    plugins and extensions as well as dependencies (Closes: #561420)
+  * If a pom file is followed by the --ignore option in the file
+    <package>.poms, then it is ignored from the build and all operations
+    (cleaning, patching)
+  * Add support for maven.cleanIgnoreRules to ignore additional dependencies or
+    plugins during the clean phase.
+  * mh_cleanpom automatically adds a published rule for any Maven plugin, this
+    rule is used later by maven-debian-helper to force the versions of the
+    Maven plugins used in a pom.xml file with the versions defined in the
+    repository
+  * Read rules from the Maven repository to force the version of
+    Maven plugins to be  the same as in the repository
+  * Add --debian-build and --no-docs-build options to mh_patchpoms to remove
+    some elements from the POM during a Debian build
+
+ -- Ludovic Claude <ludovic.claude@laposte.net>  Tue, 12 Jan 2010 00:12:23 +0100
+
+maven-repo-helper (0.9) unstable; urgency=low
+
+  * org/debian/maven/repo/POMReader.java:
+    Extend previous fix to parse much more properties
+    and use expandProperties() like other cases.
+
+ -- Damien Raude-Morvan <drazzib@debian.org>  Tue, 13 Oct 2009 22:49:43 +0200
+
+maven-repo-helper (0.8) unstable; urgency=low
+
+  * org/debian/maven/repo/POMReader.java:
+    Fix ${parent.version} parsing inside child's pom.xml
+  * Bump Standards-Version to 3.8.3 (no changes needed)
+  * Fix Vcs-* fields: use pkg-java SVN repository
+
+ -- Damien Raude-Morvan <drazzib@debian.org>  Sun, 11 Oct 2009 18:47:16 +0200
+
+maven-repo-helper (0.7) unstable; urgency=low
+
+  * Install jars in /usr/share/java and create link to them from
+    the Maven repository (as suggested by Marcus Better)
+  * Add a new script, mh_linkjar, which creates links to the jar into
+    /usr/share/maven-repo. Unlike mh_installjar, it does not copy the
+    jar into the build directory.
+  * Use install instead of dh_install in the scripts as it can
+    interfer if there is a .install file in the debian folder.
+  * Add Recommends: debhelper as debhelper is used in some scripts
+    (mh_install* and mh_linkjar)
+  * Add --set-version to mh_cleanpom, mh_installpom, mh_installpoms
+    to be able to force the version of the artifact in Maven without
+    needing patching the original POM file.
+  * More errors detected in repo scan
+  * Use http://maven.apache.org/xsd/maven-4_0_0.xsd as the location of
+    the xsd in the xml namespace declaration to keep gcj happy. It should
+    not affect Maven or other tools, provided that the xsd is registered
+    in a XML catalog.
+  * By default, remove the test dependencies from cleaned POMs (except for
+    multi-module POM) as they are not useful outside building the project
+    itself most of the time and they make checking consistency in the
+    Maven repository harder.
+  * mh_cleanpom, mh_installpom(s) and mh_transformpoms can remove
+    dependencies from the POM files
+
+ -- Ludovic Claude <ludovic.claude@laposte.net>  Thu, 16 Jul 2009 10:09:26 +0100
+
+maven-repo-helper (0.6.1) experimental; urgency=low
+
+  * Add a workaround to use gcj with maven-repo-helper:
+    avoid using gnu xml stream when reading or writing XML documents.
+
+ -- Ludovic Claude <ludovic.claude@laposte.net>  Mon, 13 Jul 2009 20:15:14 +0100
+
+maven-repo-helper (0.6) experimental; urgency=low
+
+  * Move mh_genrules scripts to the maven-debian-helper package,
+    as it needs mh_lspoms and other components from this package.
+  * Repair missing version information on dependencies
+
+ -- Ludovic Claude <ludovic.claude@laposte.net>  Thu, 09 Jul 2009 15:53:25 +0100
+
+maven-repo-helper (0.5) unstable; urgency=low
+
+  * Initial release. (Closes: #521947)
+
+ -- Ludovic Claude <ludovic.claude@laposte.net>  Thu, 12 Mar 2009 20:46:36 +0000
