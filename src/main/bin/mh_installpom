@@ -137,41 +137,41 @@ fi
 DH_OPTS="${VERBOSE:+-v} ${NOACT:+-n}"
 CLEAN_ARGS="--package=${PACKAGE} ${NOPARENT:+--no-parent} ${NORULES:+--no-rules} ${KEEP_POM_VERSION:+--keep-pom-version} ${HAS_PACKAGE_VERSION:+--has-package-version} ${NO_PUBLISH_USED_RULE:+--no-publish-used-rule} ${SETVERSION:+--set-version=$SETVERSION} ${RULES:+--rules=$RULES} ${PUBLISHED_RULES:+--published-rules=$PUBLISHED_RULES} ${IGNORE_RULES:+--ignore-rules=$IGNORE_RULES} ${CLEAN_IGNORE_RULES:+--clean-ignore-rules=$CLEAN_IGNORE_RULES} ${KEEP_ELEMENTS:+--keep-elements=$KEEP_ELEMENTS} ${MAVEN_REPO:+--maven-repo=$MAVEN_REPO}"
 
-mkdir -p debian/.mh 2> /dev/null
+mkdir -p debian/.debhelper/.mh 2> /dev/null
 
 if [[ ! -z "$VERBOSE" || "$DH_VERBOSE" = "1" ]]; then
-    echo -e "\tmh_cleanpom $DH_OPTS $CLEAN_ARGS $POM debian/.mh/pom.xml debian/.mh/pom.properties"
+    echo -e "\tmh_cleanpom $DH_OPTS $CLEAN_ARGS $POM debian/.debhelper/.mh/pom.xml debian/.debhelper/.mh/pom.properties"
 fi
 
-mh_cleanpom $DH_OPTS $CLEAN_ARGS --keep-pom-version $POM debian/.mh/pom.xml.keep debian/.mh/pom.properties.keep
-mh_cleanpom $DH_OPTS $CLEAN_ARGS $POM debian/.mh/pom.xml debian/.mh/pom.properties
-source debian/.mh/pom.properties
+mh_cleanpom $DH_OPTS $CLEAN_ARGS --keep-pom-version $POM debian/.debhelper/.mh/pom.xml.keep debian/.debhelper/.mh/pom.properties.keep
+mh_cleanpom $DH_OPTS $CLEAN_ARGS $POM debian/.debhelper/.mh/pom.xml debian/.debhelper/.mh/pom.properties
+source debian/.debhelper/.mh/pom.properties
 
 groupPath=$(echo $groupId | tr . / )
 
 if [[ ! -z "$VERBOSE" || "$DH_VERBOSE" = "1" ]]; then
-    echo -e "\tmv debian/.mh/pom.xml debian/.mh/${artifactId}-${debianVersion}.pom"
+    echo -e "\tmv debian/.debhelper/.mh/pom.xml debian/.debhelper/.mh/${artifactId}-${debianVersion}.pom"
 fi
 
 if [ -n "${IGNORE_POM}" ]; then
     exit
 fi
 
-mv debian/.mh/pom.xml.keep debian/.mh/${artifactId}-${version}.pom
-mv debian/.mh/pom.xml debian/.mh/${artifactId}-${debianVersion}.pom
+mv debian/.debhelper/.mh/pom.xml.keep debian/.debhelper/.mh/${artifactId}-${version}.pom
+mv debian/.debhelper/.mh/pom.xml debian/.debhelper/.mh/${artifactId}-${debianVersion}.pom
 
 if [[ ! -z "$VERBOSE" || "$DH_VERBOSE" = "1" ]]; then
-    echo -e "\tinstall -m 644 -D debian/.mh/${artifactId}-${version}.pom debian/${PACKAGE}/usr/share/maven-repo/${groupPath}/${artifactId}/${version}/${artifactId}-${version}.pom"
+    echo -e "\tinstall -m 644 -D debian/.debhelper/.mh/${artifactId}-${version}.pom debian/${PACKAGE}/usr/share/maven-repo/${groupPath}/${artifactId}/${version}/${artifactId}-${version}.pom"
 fi
 
-install -m 644 -D debian/.mh/${artifactId}-${version}.pom debian/${PACKAGE}/usr/share/maven-repo/${groupPath}/${artifactId}/${version}/${artifactId}-${version}.pom
+install -m 644 -D debian/.debhelper/.mh/${artifactId}-${version}.pom debian/${PACKAGE}/usr/share/maven-repo/${groupPath}/${artifactId}/${version}/${artifactId}-${version}.pom
 
 if [[ "${version}" != "${debianVersion}" ]]; then
     if [[ ! -z "$VERBOSE" || "$DH_VERBOSE" = "1" ]]; then
-        echo -e "\tinstall -m 644 -D debian/.mh/${artifactId}-${debianVersion}.pom debian/${PACKAGE}/usr/share/maven-repo/${groupPath}/${artifactId}/${debianVersion}/${artifactId}-${debianVersion}.pom"
+        echo -e "\tinstall -m 644 -D debian/.debhelper/.mh/${artifactId}-${debianVersion}.pom debian/${PACKAGE}/usr/share/maven-repo/${groupPath}/${artifactId}/${debianVersion}/${artifactId}-${debianVersion}.pom"
     fi
 
-    install -m 644 -D debian/.mh/${artifactId}-${debianVersion}.pom debian/${PACKAGE}/usr/share/maven-repo/${groupPath}/${artifactId}/${debianVersion}/${artifactId}-${debianVersion}.pom
+    install -m 644 -D debian/.debhelper/.mh/${artifactId}-${debianVersion}.pom debian/${PACKAGE}/usr/share/maven-repo/${groupPath}/${artifactId}/${debianVersion}/${artifactId}-${debianVersion}.pom
 fi
 
 if [[ ! -z "$RELOCATE" ]]; then

@@ -31,9 +31,9 @@ syntax()
    echo -e "\t[pom] is the location of the POM file to clean."
    echo -e "\t  Default to pom.xml or debian/pom.xml"
    echo -e "\t[target] is where the cleaned POM is written to."
-   echo -e "\t  Default to debian/.mh/pom.xml"
+   echo -e "\t  Default to debian/.debhelper/.mh/pom.xml"
    echo -e "\t[pom-props] is where the POM properties file will be written."
-   echo -e "\t  Default to debian/.mh/pom.properties"
+   echo -e "\t  Default to debian/.debhelper/.mh/pom.properties"
    echo -e "Options:"
    echo -e "\t-h --help: show this text"
    echo -e "\t-V --version: show the version"
@@ -182,8 +182,8 @@ PACKAGE=${PACKAGE:?"Package parameter (-p) is mandatory"}
 VERBOSE=$(getarg v verbose)
 NOACT=$(getarg n no-act)
 POM="${ARGV[0]}"
-TARGET="${ARGV[1]:-debian/.mh/pom.xml}"
-POM_PROPS="${ARGV[2]:-debian/.mh/pom.properties}"
+TARGET="${ARGV[1]:-debian/.debhelper/.mh/pom.xml}"
+POM_PROPS="${ARGV[2]:-debian/.debhelper/.mh/pom.properties}"
 HAS_PACKAGE_VERSION=$(getarg h has-package-version)
 KEEP_ELEMENTS=$(getarg keep-elements)
 

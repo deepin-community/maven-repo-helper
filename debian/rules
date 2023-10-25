@@ -11,7 +11,7 @@ export CLASSPATH=/usr/share/java/junit4.jar
 	dh $@ --buildsystem=ant
 
 override_dh_auto_configure:
-	mkdir -p debian/.mh
+	mkdir -p debian/.debhelper/.mh
 
 override_dh_auto_build: man-pages
 	dh_auto_build -- -f debian/build.xml -Dpackage=$(PACKAGE) -Dversion=$(VERSION) package -Dmaven.test.skip=true
@@ -19,7 +19,7 @@ override_dh_auto_build: man-pages
 
 	java -cp build/$(PACKAGE)-debian.jar:$(CLASSPATH) $(JAVA_OPTIONS) org.debian.maven.repo.POMCleaner \
 	        --no-parent --has-package-version --rules=debian/maven.rules pom.xml \
-		debian/.mh/$(PACKAGE)-debian.pom debian/.mh/pom.properties
+		debian/.debhelper/.mh/$(PACKAGE)-debian.pom debian/.debhelper/.mh/pom.properties
 
 override_dh_auto_test:
 ifeq (,$(filter nocheck,$(DEB_BUILD_OPTIONS)))
@@ -34,7 +34,7 @@ override_dh_auto_clean:
 
 # Generation of man pages
 SCRIPTS       := $(wildcard src/main/bin/mh_*)
-MAN_PAGES     := $(addprefix debian/.mh/doc/,$(addsuffix .1, $(notdir $(SCRIPTS))))
+MAN_PAGES     := $(addprefix debian/.debhelper/.mh/doc/,$(addsuffix .1, $(notdir $(SCRIPTS))))
 
 mh_checkrepo_description   = "Checks the Maven repository."
 mh_clean_description       = "Cleans the temporary files created by the other mh_* utilities."
@@ -53,28 +53,28 @@ mh_patchpom_description    = "Patches one POM file using the Maven dependency ru
 mh_patchpoms_description   = "Patches the POM files using the Maven dependency rules."
 mh_unpatchpoms_description = "Undo the patches on the POM files."
 
-debian/.mh/mh_lib.sh : src/main/share/mh_lib.sh
-	cp src/main/share/mh_lib.sh debian/.mh/mh_lib.sh
+debian/.debhelper/.mh/mh_lib.sh : src/main/share/mh_lib.sh
+	cp src/main/share/mh_lib.sh debian/.debhelper/.mh/mh_lib.sh
 
-debian/.mh/mh_% : src/main/bin/mh_% debian/.mh/mh_lib.sh
+debian/.debhelper/.mh/mh_% : src/main/bin/mh_% debian/.debhelper/.mh/mh_lib.sh
 	cp $< $@
-	perl -i -pe 's,\. /usr/share/maven-repo-helper/mh_lib.sh,\. debian/.mh/mh_lib.sh,' $@
+	perl -i -pe 's,\. /usr/share/maven-repo-helper/mh_lib.sh,\. debian/.debhelper/.mh/mh_lib.sh,' $@
 	chmod +x $@
 
-debian/.mh/doc:
-	mkdir -p debian/.mh/doc
-	rst2html --title="Maven Repo Helper tutorial" --stylesheet-path=doc/style.css doc/tutorial.rst debian/.mh/doc/tutorial.html
+debian/.debhelper/.mh/doc:
+	mkdir -p debian/.debhelper/.mh/doc
+	rst2html --title="Maven Repo Helper tutorial" --stylesheet-path=doc/style.css doc/tutorial.rst debian/.debhelper/.mh/doc/tutorial.html
 	cat doc/reference.rst doc/ref/mh_cleanpom.rst doc/ref/mh_installpom.rst doc/ref/mh_installpoms.rst doc/ref/mh_patchpom.rst \
 		doc/ref/mh_patchpoms.rst doc/ref/mh_unpatchpoms.rst doc/reference2.rst doc/ref/mh_installjar.rst \
 		doc/ref/mh_linkjar.rst doc/ref/mh_linkjars.rst doc/reference3.rst doc/ref/mh_clean.rst doc/ref/mh_installsite.rst \
 		doc/ref/mh_install.rst doc/reference4.rst doc/ref/mh_checkrepo.rst doc/reference5.rst \
-                doc/ref/dh_with_maven_repo_helper.rst doc/ref/dh_with_jh_maven_repo_helper.rst > debian/.mh/doc/reference.rst
-	rst2html --title="Maven Repo Helper reference" --stylesheet-path=doc/style.css debian/.mh/doc/reference.rst debian/.mh/doc/reference.html
-	rst2html --title="Maven Repo Helper repository specification" --stylesheet-path=doc/style.css doc/repository.rst debian/.mh/doc/repository.html
+                doc/ref/dh_with_maven_repo_helper.rst doc/ref/dh_with_jh_maven_repo_helper.rst > debian/.debhelper/.mh/doc/reference.rst
+	rst2html --title="Maven Repo Helper reference" --stylesheet-path=doc/style.css debian/.debhelper/.mh/doc/reference.rst debian/.debhelper/.mh/doc/reference.html
+	rst2html --title="Maven Repo Helper repository specification" --stylesheet-path=doc/style.css doc/repository.rst debian/.debhelper/.mh/doc/repository.html
 
-debian/.mh/doc/mh_%.1 : debian/.mh/mh_%
+debian/.debhelper/.mh/doc/mh_%.1 : debian/.debhelper/.mh/mh_%
 	help2man -N -n $(mh_$*_description) -o $@ $<
 
-man-pages: debian/.mh/doc $(MAN_PAGES)
+man-pages: debian/.debhelper/.mh/doc $(MAN_PAGES)
 
 .PHONY: man-pages

@@ -1,7 +1,7 @@
-build/maven-repo-helper-debian.jar       /usr/share/maven-repo/org/debian/maven/maven-repo-helper/debian/
-debian/.mh/maven-repo-helper-debian.pom  /usr/share/maven-repo/org/debian/maven/maven-repo-helper/debian/
+build/maven-repo-helper-debian.jar                  /usr/share/maven-repo/org/debian/maven/maven-repo-helper/debian/
+debian/.debhelper/.mh/maven-repo-helper-debian.pom  /usr/share/maven-repo/org/debian/maven/maven-repo-helper/debian/
 
 src/main/bin/mh_*                        /usr/bin
 src/main/share/mh_*                      /usr/share/maven-repo-helper
 src/main/share/*.pm                      /usr/share/perl5/Debian/Debhelper/Sequence
-debian/.mh/doc/*.html                    /usr/share/doc/maven-repo-helper/
+debian/.debhelper/.mh/doc/*.html         /usr/share/doc/maven-repo-helper/
