@@ -70,17 +70,17 @@ SITE_FILE="${ARGV[1]}"
 DH_OPTS="${VERBOSE:+-v} ${NOACT:+-n}"
 CLEAN_ARGS="--package=${PACKAGE} ${SETVERSION:+--set-version=$SETVERSION} ${RULES:+--rules=$RULES}"
 
-mkdir -p debian/.mh 2> /dev/null
+mkdir -p debian/.debhelper/.mh 2> /dev/null
 
 if [ -z "$SKIP_CLEAN_POM" ]; then
     if [[ ! -z "$VERBOSE" || "$DH_VERBOSE" = "1" ]]; then
-        echo -e "\tmh_cleanpom $DH_OPTS $CLEAN_ARGS $POM debian/.mh/pom.xml debian/.mh/pom.properties"
+        echo -e "\tmh_cleanpom $DH_OPTS $CLEAN_ARGS $POM debian/.debhelper/.mh/pom.xml debian/.debhelper/.mh/pom.properties"
     fi
 
-    mh_cleanpom $DH_OPTS $CLEAN_ARGS $POM debian/.mh/pom.xml debian/.mh/pom.properties
+    mh_cleanpom $DH_OPTS $CLEAN_ARGS $POM debian/.debhelper/.mh/pom.xml debian/.debhelper/.mh/pom.properties
 fi
 
-source debian/.mh/pom.properties
+source debian/.debhelper/.mh/pom.properties
 
 groupPath=$(echo $groupId | tr . / )
 
@@ -105,11 +105,11 @@ install_site ()
 		echo "mh_installsite: Install $srcSite to $destDir $destSite"
 	fi
 
-    cp ${srcSite} debian/.mh/${destSite}
+    cp ${srcSite} debian/.debhelper/.mh/${destSite}
 	if [[ ! -z "$VERBOSE" || "$DH_VERBOSE" = "1" ]]; then
-		echo -e "\tinstall -m 644 -D debian/.mh/${destSite} debian/${PACKAGE}/${destDir}/${destSite}"
+		echo -e "\tinstall -m 644 -D debian/.debhelper/.mh/${destSite} debian/${PACKAGE}/${destDir}/${destSite}"
 	fi
-	install -m 644 -D debian/.mh/${destSite} debian/${PACKAGE}/${destDir}/${destSite}
+	install -m 644 -D debian/.debhelper/.mh/${destSite} debian/${PACKAGE}/${destDir}/${destSite}
 }
 
 # Install site.xml in the Maven repository

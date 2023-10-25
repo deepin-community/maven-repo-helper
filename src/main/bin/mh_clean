@@ -21,15 +21,9 @@ set -e
 syntax()
 {
    echo -e "Usage: mh_clean"
-   echo -e "Cleans the temporary files created by the other mh_* utilities."
+   echo -e "DEPRECATED: Use debian/clean instead"
    echo -e ""
    exit 1
 }
 
 parseargs "$@"
-
-if [ -f "debian/.mh_clean" ]; then
-  rm -f `cat debian/.mh_clean` debian/.mh_clean
-fi
-rm -rf debian/.mh
-
